@@ -21,13 +21,16 @@
             </li>  
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a href="{% url 'tasks' %}" class="nav-link">Tasks Pending</a>
+                <a href="{% url 'cargo_list' %}" class="nav-link">Cargos (VBF)</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'tasks_completed' %}" class="nav-link">Tasks completed</a>
+                <a href="{% url 'empleado_list' %}" class="nav-link">Empleados (VBF)</a>
             </li>
-             <li class="nav-item">
-                <a href="/tasks/create/" class="nav-link">Create Task</a>
+            <li class="nav-item">
+                <a href="{% url 'cargo_list_cbv' %}" class="nav-link">Cargos (VBC)</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'empleado_list_cbv' %}" class="nav-link">Empleados (VBC)</a>
             </li>
               <li class="nav-item">
                 <a href="/logout/" class="nav-link">Logout</a>

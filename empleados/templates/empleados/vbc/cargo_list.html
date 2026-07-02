@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <main class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1 class="display-5">Cargos <small class="text-muted fs-6">(VBC)</small></h1>
+          <a class="btn btn-dark" href="{% url 'cargo_create_cbv' %}">Nuevo cargo</a>
+        </div>
+
+        <ul class="list-group mt-4">
+          {% for cargo in cargos %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="mb-0">{{ cargo.nombre }}</h5>
+                <small class="text-muted">{{ cargo.descripcion }}</small>
+              </div>
+              <div>
+                <a class="btn btn-secondary btn-sm" href="{% url 'cargo_update_cbv' cargo.pk %}">Editar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'cargo_delete_cbv' cargo.pk %}">Eliminar</a>
+              </div>
+            </li>
+          {% empty %}
+            <li class="list-group-item">No hay cargos registrados.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </main>
+{% endblock %}

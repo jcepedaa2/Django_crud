@@ -17,17 +17,37 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tasks import views
+from empleados import views as empleados_views
+from empleados import views_cbv as empleados_cbv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('signup/', views.signup, name='signup'),
-    path('tasks/', views.tasks, name='tasks'),
-    path('tasks_completed/', views.tasks_completed, name='tasks_completed'),
-    path('tasks/create/', views.create_task, name='create_task'),
-    path('tasks/<int:task_id>/', views.task_detail, name='task_detail'),
-    path('tasks/<int:task_id>/complete/', views.complete_task, name='complete_task'),
-    path('tasks/<int:task_id>/delete/', views.delete_task, name='delete_task'),
     path('logout/', views.signout, name='logout'),
-    path('signin/', views.signin, name='signin')
+    path('signin/', views.signin, name='signin'),
+
+    # Cargos - Vistas Basadas en Funciones (VBF)
+    path('cargos/', empleados_views.cargo_list, name='cargo_list'),
+    path('cargos/nuevo/', empleados_views.cargo_create, name='cargo_create'),
+    path('cargos/<int:pk>/editar/', empleados_views.cargo_update, name='cargo_update'),
+    path('cargos/<int:pk>/eliminar/', empleados_views.cargo_delete, name='cargo_delete'),
+
+    # Empleados - Vistas Basadas en Funciones (VBF)
+    path('empleados/', empleados_views.empleado_list, name='empleado_list'),
+    path('empleados/nuevo/', empleados_views.empleado_create, name='empleado_create'),
+    path('empleados/<int:pk>/editar/', empleados_views.empleado_update, name='empleado_update'),
+    path('empleados/<int:pk>/eliminar/', empleados_views.empleado_delete, name='empleado_delete'),
+
+    # Cargos - Vistas Basadas en Clases (VBC)
+    path('cbv/cargos/', empleados_cbv.CargoListView.as_view(), name='cargo_list_cbv'),
+    path('cbv/cargos/nuevo/', empleados_cbv.CargoCreateView.as_view(), name='cargo_create_cbv'),
+    path('cbv/cargos/<int:pk>/editar/', empleados_cbv.CargoUpdateView.as_view(), name='cargo_update_cbv'),
+    path('cbv/cargos/<int:pk>/eliminar/', empleados_cbv.CargoDeleteView.as_view(), name='cargo_delete_cbv'),
+
+    # Empleados - Vistas Basadas en Clases (VBC)
+    path('cbv/empleados/', empleados_cbv.EmpleadoListView.as_view(), name='empleado_list_cbv'),
+    path('cbv/empleados/nuevo/', empleados_cbv.EmpleadoCreateView.as_view(), name='empleado_create_cbv'),
+    path('cbv/empleados/<int:pk>/editar/', empleados_cbv.EmpleadoUpdateView.as_view(), name='empleado_update_cbv'),
+    path('cbv/empleados/<int:pk>/eliminar/', empleados_cbv.EmpleadoDeleteView.as_view(), name='empleado_delete_cbv'),
 ]

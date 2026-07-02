@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <main class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1 class="display-5">Empleados <small class="text-muted fs-6">(VBC)</small></h1>
+          <a class="btn btn-dark" href="{% url 'empleado_create_cbv' %}">Nuevo empleado</a>
+        </div>
+
+        <table class="table table-striped mt-4">
+          <thead>
+            <tr>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Correo</th>
+              <th>Sueldo</th>
+              <th>Fecha ingreso</th>
+              <th>Cargo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for empleado in empleados %}
+              <tr>
+                <td>{{ empleado.nombres }}</td>
+                <td>{{ empleado.apellidos }}</td>
+                <td>{{ empleado.correo }}</td>
+                <td>{{ empleado.sueldo }}</td>
+                <td>{{ empleado.fecha_ingreso|date:'Y-m-d' }}</td>
+                <td>{{ empleado.cargo }}</td>
+                <td class="text-end">
+                  <a class="btn btn-secondary btn-sm" href="{% url 'empleado_update_cbv' empleado.pk %}">Editar</a>
+                  <a class="btn btn-danger btn-sm" href="{% url 'empleado_delete_cbv' empleado.pk %}">Eliminar</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="7">No hay empleados registrados.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+{% endblock %}
